@@ -57,7 +57,8 @@ public class Main extends Application {
 	public void test(Button e, ArrayList<Button> btn) {
         //押されたボタンに〇か×が入る
 		e.setText(var);
-
+		
+		//押されたボタン非活性
 		e.setDisable(true);
 
         //列判定
