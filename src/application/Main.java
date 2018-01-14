@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
-	
+
 	private static final String MARU = "〇";
 	private static final String BATSU = "×";
 
@@ -29,6 +29,8 @@ public class Main extends Application {
 
         for(int i=0; i<9; i++) {
         	btn.add(new  Button("　"));
+        	btn.get(i).setPrefWidth(150.0);
+        	btn.get(i).setPrefHeight(150.0);
         }
 
         GridPane pane = new GridPane();
@@ -47,7 +49,7 @@ public class Main extends Application {
         	e.setOnAction(event -> test(e,btn));
         }
 
-        Scene scene = new Scene(pane,150,150);
+        Scene scene = new Scene(pane,500,500);
         stage.setScene(scene);
         stage.show();
     }
@@ -55,6 +57,8 @@ public class Main extends Application {
 	public void test(Button e, ArrayList<Button> btn) {
         //押されたボタンに〇か×が入る
 		e.setText(var);
+
+		e.setDisable(true);
 
         //列判定
         check(btn);
