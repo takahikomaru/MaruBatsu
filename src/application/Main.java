@@ -10,7 +10,14 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+
 public class Main extends Application {
+	
+	private static final String MARU = "〇";
+	private static final String BATSU = "×";
+
+	//初期値"〇"
+	private static String var = MARU;
 
 	@Override
     public void start(Stage stage) {
@@ -37,7 +44,7 @@ public class Main extends Application {
         pane.add(btn.get(8), 2, 2);
 
         for(Button e : btn) {
-        e.setOnAction(event -> test(e,btn));
+        	e.setOnAction(event -> test(e,btn));
         }
 
         Scene scene = new Scene(pane,150,150);
@@ -46,43 +53,67 @@ public class Main extends Application {
     }
 
 	public void test(Button e, ArrayList<Button> btn) {
-        e.setText("〇");
+        //押されたボタンに〇か×が入る
+		e.setText(var);
 
-        //判定
-        if (btn.get(0).getText().equals("〇") && btn.get(1).getText().equals("〇") && btn.get(2).getText().equals("〇")) {
+        //列判定
+        check(btn);
+
+        //〇×切り替え
+        var =change_var(var);
+
+	}
+
+	private void check(ArrayList<Button> btn) {
+	    //判定
+        if (btn.get(0).getText().equals(var) && btn.get(1).getText().equals(var) && btn.get(2).getText().equals(var)) {
             finMessage();
          }
-        else if (btn.get(3).getText().equals("〇") && btn.get(4).getText().equals("〇") && btn.get(5).getText().equals("〇")) {
+        else if (btn.get(3).getText().equals(var) && btn.get(4).getText().equals(var) && btn.get(5).getText().equals(var)) {
             finMessage();
          }
-        else if (btn.get(6).getText().equals("〇") && btn.get(7).getText().equals("〇") && btn.get(8).getText().equals("〇")) {
+        else if (btn.get(6).getText().equals(var) && btn.get(7).getText().equals(var) && btn.get(8).getText().equals(var)) {
             finMessage();
          }
-        else if (btn.get(0).getText().equals("〇") && btn.get(3).getText().equals("〇") && btn.get(6).getText().equals("〇")) {
+        else if (btn.get(0).getText().equals(var) && btn.get(3).getText().equals(var) && btn.get(6).getText().equals(var)) {
             finMessage();
          }
-        else if (btn.get(1).getText().equals("〇") && btn.get(4).getText().equals("〇") && btn.get(7).getText().equals("〇")) {
+        else if (btn.get(1).getText().equals(var) && btn.get(4).getText().equals(var) && btn.get(7).getText().equals(var)) {
             finMessage();
          }
-        else if (btn.get(2).getText().equals("〇") && btn.get(5).getText().equals("〇") && btn.get(8).getText().equals("〇")) {
+        else if (btn.get(2).getText().equals(var) && btn.get(5).getText().equals(var) && btn.get(8).getText().equals(var)) {
             finMessage();
          }
-        else if (btn.get(0).getText().equals("〇") && btn.get(4).getText().equals("〇") && btn.get(8).getText().equals("〇")) {
+        else if (btn.get(0).getText().equals(var) && btn.get(4).getText().equals(var) && btn.get(8).getText().equals(var)) {
             finMessage();
          }
-        else if (btn.get(2).getText().equals("〇") && btn.get(4).getText().equals("〇") && btn.get(6).getText().equals("〇")) {
+        else if (btn.get(2).getText().equals(var) && btn.get(4).getText().equals(var) && btn.get(6).getText().equals(var)) {
             finMessage();
+         }
+        else {
+
          }
 	}
 
 	private void finMessage() {
-	       Alert alert = new Alert(AlertType.INFORMATION); //アラートを作成
+       Alert alert = new Alert(AlertType.INFORMATION); //アラートを作成
 
-	       alert.setTitle( "ゲーム終了" );
-	       alert.getDialogPane().setHeaderText( "ゲーム終了です" );
-	       alert.getDialogPane().setContentText( "〇の勝ち" );
+       alert.setTitle( "ゲーム終了" );
+       alert.getDialogPane().setHeaderText( "ゲーム終了です" );
+       alert.getDialogPane().setContentText( var + "の勝ち" );
 
-	       alert.showAndWait(); //表示
-	    }
+       alert.showAndWait(); //表示
+	}
+
+	private String change_var(String var) {
+		if(var.equals(MARU)) {
+			var = BATSU;
+			return var;
+		}
+		else{
+			var = MARU;
+			return var;
+		}
+	}
  }
 
