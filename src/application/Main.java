@@ -8,9 +8,11 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    @Override
+	@Override
     public void start(Stage stage) {
         stage.setTitle("Test");
+
+     // イベントリスナの生成
 
         Button btn1 = new  Button("　");
         Button btn2 = new  Button("　");
@@ -33,10 +35,19 @@ public class Main extends Application {
         pane.add(btn8, 1, 2);
         pane.add(btn9, 2, 2);
 
-        btn1.setOnAction(event -> btn1.setText("〇"));
 
-        Scene scene = new Scene(pane,100,100);
+
+
+        btn1.setOnAction(e -> test(btn1));
+        btn2.setOnAction(e -> test(btn2));
+
+        Scene scene = new Scene(pane,150,150);
         stage.setScene(scene);
         stage.show();
     }
+
+	public void test(Button e) {
+        e.setText("〇");
+    }
+
 }
